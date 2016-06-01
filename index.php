@@ -22,70 +22,60 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="weather-form col-lg-4">
+            <div class="weather-form col-lg-12">
                 <div class="login-container">
-                    <form id="loginForm">
-                        <legend>
-                            Enter Location
-                        </legend>
-
-                        <div id="respond"></div>
-
-                        <input placeholder="Longitude" type="text" name="longitude" id="longitude" class="form-control">
-                        <input placeholder="Latitude"  type="text" name="latitude" id="latitude" class="form-control">
-
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input placeholder="Longitude" type="text" name="longitude" id="longitude" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input placeholder="Latitude"  type="text" name="latitude" id="latitude" class="form-control">
+                        </div>
                         <input type="button" value="Submit" id="submitButton" class="btn btn-md btn-success">
-
                     </form>
+
+
                 </div>
 
             </div>
-            <div class="weather-display col-lg-8">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-lg-4">
-                            <div class="icon thunder-storm">
+            <div class="weather-display col-lg-12">
+                <div id="map" class="col-lg-7"></div>
+                <div id="results" class="col-lg-5">
+                    <div class="row results-name">
+                        <div class="results-icon col-lg-5">
+                            <div class="icon thunder-storm" id="thunder-storm">
                                 <div class="cloud"></div>
                                 <div class="lightning">
                                     <div class="bolt"></div>
                                     <div class="bolt"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="icon cloudy">
+
+                            <div class="icon cloudy hidden" id="cloudy">
                                 <div class="cloud"></div>
                                 <div class="cloud"></div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="icon flurries">
+
+                            <div class="icon flurries hidden" id="flurries">
                                 <div class="cloud"></div>
                                 <div class="snow">
                                     <div class="flake"></div>
                                     <div class="flake"></div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-lg-4">
-                            <div class="icon sunny">
+
+                            <div class="icon sunny hidden" id="sunny">
                                 <div class="sun">
                                     <div class="rays"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="icon rainy">
+
+                            <div class="icon rainy hidden" id="rainy">
                                 <div class="cloud"></div>
                                 <div class="rain"></div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="icon sun-shower">
+
+                            <div class="icon sun-shower hidden" id="sun-shower">
                                 <div class="cloud"></div>
                                 <div class="sun">
                                     <div class="rays"></div>
@@ -93,10 +83,27 @@
                                 <div class="rain"></div>
                             </div>
                         </div>
-
+                        <div class="results-city col-lg-7">
+                            <label id="r-city-name">Pasan</label>
+                        </div>
                     </div>
 
+                    <div class="result-table">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+
+                            <tr><td>Description</td><td id="description">Gentle Breeze 4.1 m/s</td></tr>
+                            <tr><td>Cloudiness</td><td id="cloudiness">broken clouds</td></tr>
+                            <tr><td>Pressure<br></td><td id="pressure">1020 hpa</td></tr>
+                            <tr><td>Humidity</td><td id="humidity">93 %</td></tr>
+                            <tr><td>Rain</td><td id="rain">0.25</td></tr>
+                            <tr><td>Sunrise</td><td id="sunrise">9:19</td></tr>
+                            <tr><td>Sunset</td><td id="sunset">1:39</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
