@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bff39db9-7134-4d8c-8aa1-5d9255c3e797" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/openWeatherApp.iml" afterPath="$PROJECT_DIR$/.idea/openWeatherApp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weatherAppController.php" afterPath="$PROJECT_DIR$/weatherAppController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/weatherapp.css" afterPath="$PROJECT_DIR$/css/weatherapp.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="openWeatherApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +30,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12164579" vertical-offset="2754" max-vertical-offset="4947">
-              <caret line="166" column="44" selection-start-line="166" selection-start-column="44" selection-end-line="166" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.24329159" vertical-offset="3383" max-vertical-offset="4964">
+              <caret line="206" column="159" selection-start-line="206" selection-start-column="159" selection-end-line="206" selection-end-column="159" />
               <folding />
             </state>
           </provider>
@@ -315,8 +308,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12164579" vertical-offset="2754" max-vertical-offset="4947">
-          <caret line="166" column="44" selection-start-line="166" selection-start-column="44" selection-end-line="166" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.24329159" vertical-offset="3383" max-vertical-offset="4964">
+          <caret line="206" column="159" selection-start-line="206" selection-start-column="159" selection-end-line="206" selection-end-column="159" />
           <folding />
         </state>
       </provider>

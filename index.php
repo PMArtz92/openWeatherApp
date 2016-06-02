@@ -204,7 +204,7 @@
     function ajaxSend(longitude,latitude){
         $.ajax({
             type: "POST",
-            url: "http://PMArtz:8280/services/pmartz?lat=" + latitude + "&lon=" + longitude,
+            url: "http://PMArtz:8280/services/pmartz?lat=" + latitude + "&lon=" + longitude, // Replace "http://PMArtz:8280/services/pmartz" with your endpoint
             dataType: "json",
             success: function(response){
                 var name = response['name'];
