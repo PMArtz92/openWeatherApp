@@ -117,6 +117,7 @@
                     <div id="mapCanvas"></div>
                 </div>
                 <div id="results" class="col-lg-5">
+                    <h1 id="404" class="hidden"></h1>
 
                     <div class="row results-name hidden" id="results-name">
                         <div id="results-icon" class="results-icon col-lg-5">
@@ -165,7 +166,7 @@
                         <div class="results-city col-lg-7">
                             <label id="r-city-name"></label>
                         </div>
-                        <h1 id="404"></h1>
+
                     </div>
 
                     <div class="result-table hidden" id="result-table">
@@ -201,15 +202,16 @@
         var longitude = $('#longitude').val();
         var latitude = $('#latitude').val();
         console.log(longitude);
-        ajaxSend(longitude,latitude);
+        //ajaxSend(longitude,latitude);
+        $.getJSON( "http://PMArtz:8280/services/pmartz?callback=?",{"lat" :latitude ,"lon" :longitude});
     });
 
 //Ajax call function
-    function ajaxSend(longitude,latitude){
+    /*function ajaxSend(longitude,latitude){
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "http://PMArtz:8280/services/pmartz?lat=" + latitude + "&lon=" + longitude, // Replace "http://PMArtz:8280/services/pmartz" with your endpoint
-            dataType: "json",
+            dataType: "JSONP"
             success: function(response){ //response data
                 var name = response['name'];
                 var type = response['main'];
@@ -290,16 +292,82 @@
 
         });
 
+    }*/
+
+    function openWeather(response){ //response data
+        var name = response['name'];
+        var type = response['main'];
+        var description = response['description'];
+        var pressure = response['pressure'];
+        var humidity = response['humidity'];
+        var windspeed = response['windspeed'];
+        var sunrise = response['sunrise'];
+        var sunset = response['sunset'];
+        var icon = response['icon'];
+        var cod = response['cod'];
+        console.log(cod);
+        if(cod == '404'){
+            $('#result-table').addClass('hidden');
+            $('#results-name').addClass('hidden');
+            $('#404').removeClass('hidden');
+            document.getElementById("404").innerHTML = "Ooopz..! No City Found..!";
+        }else{
+            $('#404').addClass('hidden');
+
+            $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').fadeOut(500,function(){
+                $('#results-name').removeClass('hidden');
+                $('#result-table').removeClass('hidden');
+                $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').empty();
+                document.getElementById("r-city-name").innerHTML = name;
+                document.getElementById("description").innerHTML = description;
+                document.getElementById("type").innerHTML = type;
+                document.getElementById("pressure").innerHTML = pressure;
+                document.getElementById("humidity").innerHTML = humidity;
+                document.getElementById("windspeed").innerHTML = windspeed;
+                document.getElementById("sunrise").innerHTML = sunrise;
+                document.getElementById("sunset").innerHTML = sunset;
+                $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').fadeIn(500);
+            });
+
+            if(icon == '01d' || icon == '01n'){
+                $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                $('#sunny').removeClass('hidden');
+            }
+            else if(icon == '02d' ||  icon == '02n' ||  icon == '03d' ||  icon == '03n' ||  icon == '04d' ||  icon == '04n'){
+                $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                $('#cloudy').removeClass('hidden');
+            }
+            else if(icon == '10d'){
+                $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                $('#sun-shower').removeClass('hidden');
+
+            }
+            else if(icon == '09d' || icon == '09n' || icon == '10n'){
+                $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                $('#rainy').removeClass('hidden');
+            }
+            else if(icon = '11d' || icon == '11n'){
+                $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                $('#thunder-storm').removeClass('hidden');
+
+            }
+            else if(icon == '13d' || icon == '13n'){
+                $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                $('#flurries').removeClass('hidden');
+
+            }
+            else if(icon = ' '){
+                console.log("Empty");
+            }
+        }
+
+
+
     }
 
-    function addData(name,type,description,pressure,humidity,windspeed,sunrise,sunset){
-        console.log(name);
-        //$('#r-city-name, #description,#cloudiness,#pressure,#humidity,#rain,#sunrise,#sunset').empty();
-        $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').fadeOut(500,function(){
-            $('#r-city-name, #description,#cloudiness,#pressure,#humidity,#rain,#sunrise,#sunset').empty();
 
-        });
-    }
+
+
 
 </script>
 
