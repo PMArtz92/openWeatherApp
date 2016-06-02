@@ -1,4 +1,10 @@
+label {
+    color: #fff;
+}
 
+#404{
+    font-size: 70px !important;
+}
 /*------------------------------ Login ----------------------------------*/
 
 .login-container{

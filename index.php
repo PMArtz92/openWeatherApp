@@ -36,7 +36,7 @@
             latLng.lat(),
             latLng.lng()
         ].join(', ');*/
-        console.log(latLng.lat());
+        //console.log(latLng.lat());
         $("#latitude").val(latLng.lat());
         $("#longitude").val(latLng.lng());
     }
@@ -117,8 +117,9 @@
                     <div id="mapCanvas"></div>
                 </div>
                 <div id="results" class="col-lg-5">
-                    <div class="row results-name">
-                        <div class="results-icon col-lg-5">
+
+                    <div class="row results-name hidden" id="results-name">
+                        <div id="results-icon" class="results-icon col-lg-5">
                             <div class="icon thunder-storm hidden" id="thunder-storm">
                                 <div class="cloud"></div>
                                 <div class="lightning">
@@ -158,13 +159,16 @@
                                 </div>
                                 <div class="rain"></div>
                             </div>
+
                         </div>
+
                         <div class="results-city col-lg-7">
                             <label id="r-city-name"></label>
                         </div>
+                        <h1 id="404"></h1>
                     </div>
 
-                    <div class="result-table" id="result-table">
+                    <div class="result-table hidden" id="result-table">
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                             <tr><td>Type</td><td id="type"></td></tr>
@@ -200,13 +204,13 @@
         ajaxSend(longitude,latitude);
     });
 
-
+//Ajax call function
     function ajaxSend(longitude,latitude){
         $.ajax({
             type: "POST",
             url: "http://PMArtz:8280/services/pmartz?lat=" + latitude + "&lon=" + longitude, // Replace "http://PMArtz:8280/services/pmartz" with your endpoint
             dataType: "json",
-            success: function(response){
+            success: function(response){ //response data
                 var name = response['name'];
                 var type = response['main'];
                 var description = response['description'];
@@ -216,47 +220,63 @@
                 var sunrise = response['sunrise'];
                 var sunset = response['sunset'];
                 var icon = response['icon'];
-                console.log(icon);
-                $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').fadeOut(500,function(){
-                    $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').empty();
-                    document.getElementById("r-city-name").innerHTML = name;
-                    document.getElementById("description").innerHTML = description;
-                    document.getElementById("type").innerHTML = type;
-                    document.getElementById("pressure").innerHTML = pressure;
-                    document.getElementById("humidity").innerHTML = humidity;
-                    document.getElementById("windspeed").innerHTML = windspeed;
-                    document.getElementById("sunrise").innerHTML = sunrise;
-                    document.getElementById("sunset").innerHTML = sunset;
-                    $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').fadeIn(500);
-                });
+                var cod = response['cod'];
+                console.log(cod);
+                if(cod == '404'){
+                    $('#result-table').addClass('hidden');
+                    $('#results-name').addClass('hidden');
+                    $('#404').removeClass('hidden');
+                    document.getElementById("404").innerHTML = "Ooopz..! No City Found..!";
+                }else{
+                    $('#404').addClass('hidden');
 
-                if(icon == '01d' || icon == '01n'){
-                    $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
-                    $('#sunny').removeClass('hidden');
-                }
-                else if(icon == '02d' ||  icon == '02n' ||  icon == '03d' ||  icon == '03n' ||  icon == '04d' ||  icon == '04n'){
-                    $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
-                    $('#cloudy').removeClass('hidden');
-                }
-                else if(icon == '10d'){
-                    $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
-                    $('#sun-shower').removeClass('hidden');
+                    $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').fadeOut(500,function(){
+                        $('#results-name').removeClass('hidden');
+                        $('#result-table').removeClass('hidden');
+                        $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').empty();
+                        document.getElementById("r-city-name").innerHTML = name;
+                        document.getElementById("description").innerHTML = description;
+                        document.getElementById("type").innerHTML = type;
+                        document.getElementById("pressure").innerHTML = pressure;
+                        document.getElementById("humidity").innerHTML = humidity;
+                        document.getElementById("windspeed").innerHTML = windspeed;
+                        document.getElementById("sunrise").innerHTML = sunrise;
+                        document.getElementById("sunset").innerHTML = sunset;
+                        $('#r-city-name, #description,#type,#pressure,#humidity,#windspeed,#sunrise,#sunset').fadeIn(500);
+                    });
 
-                }
-                else if(icon == '09d' || icon == '09n' || icon == '10n'){
-                    $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
-                    $('#rainy').removeClass('hidden');
-                }
-                else if(icon = '11d' || icon == '11n'){
-                    $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
-                    $('#thunder-storm').removeClass('hidden');
+                    if(icon == '01d' || icon == '01n'){
+                        $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                        $('#sunny').removeClass('hidden');
+                    }
+                    else if(icon == '02d' ||  icon == '02n' ||  icon == '03d' ||  icon == '03n' ||  icon == '04d' ||  icon == '04n'){
+                        $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                        $('#cloudy').removeClass('hidden');
+                    }
+                    else if(icon == '10d'){
+                        $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                        $('#sun-shower').removeClass('hidden');
 
-                }
-                else if(icon == '13d' || icon == '13n'){
-                    $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
-                    $('#flurries').removeClass('hidden');
+                    }
+                    else if(icon == '09d' || icon == '09n' || icon == '10n'){
+                        $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                        $('#rainy').removeClass('hidden');
+                    }
+                    else if(icon = '11d' || icon == '11n'){
+                        $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                        $('#thunder-storm').removeClass('hidden');
 
+                    }
+                    else if(icon == '13d' || icon == '13n'){
+                        $('#thunder-storm,#cloudy,#flurries,#rainy,#sun-shower,#sunny').addClass('hidden');
+                        $('#flurries').removeClass('hidden');
+
+                    }
+                    else if(icon = ' '){
+                        console.log("Empty");
+                    }
                 }
+
 
 
             },
