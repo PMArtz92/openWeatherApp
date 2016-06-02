@@ -6,6 +6,7 @@
     border-radius: 3px;
     background: rgba(0, 0, 0, 0.50);
     text-align: center;
+    color: #fff;
 }
 
 .login-title{
@@ -46,4 +47,20 @@
 
 .result-table{
     background-color: #fff;
+}
+
+/*---------------------------- Map ------------------------------------*/
+
+#mapCanvas {
+    width: 500px;
+    height: 400px;
+    float: left;
+    margin-top:10px;
+}
+#infoPanel {
+    float: left;
+    margin-left: 10px;
+}
+#infoPanel div {
+    margin-bottom: 5px;
 }
